@@ -24,22 +24,14 @@ class Queue:
 end = []
 progresses = [93,30,55]
 speeds=[1,30,5]
-for i in range(0,len(progresses)):
-    end.append(math.ceil((100-progresses[i])/speeds[i]))
-    print end
-answer = []
+answer =[]
+progresses = [math.ceil((100-a)/b) for a,b in zip(progresses,speeds)]
 
-test = Queue()
-
-test.Enqueue(end[0])
-
-for i in range(0,len(end)-1):
-    count = 1;
-    if end[i+1]<=end[i]:
-        test.Enqueue(end[i+1])
-        count += 1
-    else:
-        while(test.isEmpty()==False):
-            test.Dequeue()
-    answer.append(count)
-print(answer)
+front = 0
+for i in range(len(progresses)):
+    print i
+    if progresses[front]<progresses[i]:
+        answer.append(i-front)
+        front = i
+answer.append(len(progresses)-front)
+print answer
